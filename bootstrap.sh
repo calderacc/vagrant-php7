@@ -40,13 +40,13 @@ cat << EOF | sudo tee -a /etc/apache2/sites-available/default.conf
 </Directory>
 
 <VirtualHost *:80>
-    DocumentRoot /var/www/app
-    ServerName app.dev
+    DocumentRoot /var/www/criticalmass.in
+    ServerName criticalmass.local
 </VirtualHost>
 
 <VirtualHost *:80>
     DocumentRoot /var/www/phpmyadmin
-    ServerName phpmyadmin.dev
+    ServerName phpmyadmin.local
 </VirtualHost>
 EOF
 sudo a2ensite default.conf
@@ -67,4 +67,11 @@ sudo mv /var/www/phpMyAdmin-4.0.10.11-english/ /var/www/phpmyadmin
 
 echo "-- Setup databases --"
 mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-mysql -uroot -proot -e "CREATE DATABASE my_database";
+mysql -uroot -proot -e "CREATE DATABASE criticalmass";
+
+echo "-- Install languages --"
+sudo apt-get install language-pack-de
+
+echo "-- clone repositories --"
+git clone https://github.com/calderacc/criticalmass /var/www/criticalmass.in
+composer install -d /var/www/criticalmass.in
