@@ -19,8 +19,8 @@ sudo add-apt-repository ppa:ondrej/php
 sudo add-apt-repository ppa:chris-lea/redis-server
 Update
 
-echo "-- Install NodeJS --"
-curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+#echo "-- Install NodeJS --"
+#curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
 
 echo "-- Install packages --"
 sudo apt-get install -y --force-yes apache2 mysql-server-5.6 git-core nodejs rabbitmq-server redis-server
